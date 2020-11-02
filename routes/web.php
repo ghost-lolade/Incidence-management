@@ -75,18 +75,18 @@ Route::post('uploadCallFile', 'CallLogController@uploadCallLogFile');
 
 // POS ROUTES
 
-Route::resource('atmreport-management', 'PosLogController');
-Route::get('logeco', 'PosLogController@createEco');
-Route::post('logecosave', 'PosLogController@storeEco');
-Route::get('listopencall', 'PosLogController@indexopencall');
+Route::resource('posreport-management', 'PosLogController');
+Route::get('poslogeco', 'PosLogController@createEco');
+Route::post('poslogecosave', 'PosLogController@storeEco');
+Route::get('poslistopencall', 'PosLogController@indexopencall');
 //Route::resource('confirmclosure', 'ConfirmClosureController');
-Route::get('search-management', 'PosLogController@searchreporter');
-Route::post('atmviewreport-management', 'PosLogController@viewReporter');
-Route::get('search-terminal', 'PosLogController@searchTerminal');
-Route::post('viewterminalreport', 'PosLogController@viewTerminalReporter');
+Route::get('possearch-management', 'PosLogController@searchreporter');
+Route::post('posatmviewreport-management', 'PosLogController@viewReporter');
+Route::get('possearch-terminal', 'PosLogController@searchTerminal');
+Route::post('posviewterminalreport', 'PosLogController@viewTerminalReporter');
 
-Route::get('uploadCall', 'PosLogController@uploadCallLog');
-Route::post('uploadCallFile', 'PosLogController@uploadCallLogFile');
+Route::get('posuploadCall', 'PosLogController@uploadCallLog');
+Route::post('posuploadCallFile', 'PosLogController@uploadCallLogFile');
 // end of Pos routes
 
 

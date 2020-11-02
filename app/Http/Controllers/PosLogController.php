@@ -156,25 +156,6 @@ class PosLogController extends Controller
                     'reopen_at' =>$request['reopen_at'],
                     
                 ]);
-                // CallLog::create([
-                //     'pos_id' => $request['terminalid'][$i],
-                //     'atm_name' => $request['atmname'][$i],
-                //     'custodian_phone' => $request['custodian_phone'][$i],
-                //     'error_code' => $request['errorcode'],
-                //     'subject' => $request['subject'],
-                //     'vendor_name' =>$vendor_name,
-                //       'ce_name' =>$ce,
-                //     'vendor_id' =>$vendor_id,
-                //     'sla_hour' =>$sla_hour,
-                //     'atm_state' =>$state,
-                //     'region' =>$region,
-                // 'ticket_no' => preg_replace("/[^a-zA-Z0-9]+/", "", $current),
-                //     'request_status' =>"Open",
-                //     'vendor_request_status' =>"Open",
-                //     'address' =>$address,
-                //     'fromaddress' =>$user,
-                //     'mail_at' =>$current,
-                // ]);
                 
                  $pos_id= $request['terminalid'][0];
                 
@@ -257,7 +238,7 @@ class PosLogController extends Controller
                 for ($i = 0; $i < $counter; ++$i) {
                     $terminal_id= $request['terminalid'][$i];
 
-                       $searchvendor= BankData::where('terminal_id', '=', $terminal_id )->get();
+                       $searchvendor= PosData::where('terminal_id', '=', $terminal_id )->get();
 
                    $vendor_name=  $searchvendor[0]->vendor_name;
                    $vendor_id=  $searchvendor[0]->vendor_id;
@@ -267,24 +248,45 @@ class PosLogController extends Controller
                    $atm_code=  $searchvendor[0]->atm_code;
                    $address =  $searchvendor[0]->address;
                    $timers=  $searchvendor[0]->timers;
-                    CallLog::create([
-                        'terminal_id' => $request['terminalid'][$i],
-                        'atm_name' => $request['atmname'][$i],
-                        'custodian_phone' => $request['custodian_phone'][$i],
-                        'error_code' => $request['errorcode'][$i],
-                        'vendor_name' =>$vendor_name,
-                        'vendor_id' =>$vendor_id,
-                        'sla_hour' =>$sla_hour,
-                        'atm_state' =>$state,
-                        'region' =>$region,
-                        'ticket_no' =>$atm_code,
-                        'request_status' =>"Open",
-                        'vendor_request_status' =>"Open",
-                        'address' =>$address,
-                        'fromaddress' =>$user,
+
+                   PosLog::create([
+                    'pos_id' => $request['terminalid'][$i],
+                    'incidence_no' =>  $request['incidence_no'][$i],
+                    'serial_no' => $request['serial_no'][$i],
+                    'branch' => $request['branch'],
+                    'fault_description' => $request['fault_description'],
+                    'subject' => $request['subject'],
+                    'vendor_id' => $vendor_id,
+                    'log date' => $request['log_date'],
+                    'fromaddress' =>$user,
+                    'status' =>$request['status'],
+                    'sla_hour' =>$sla_hour,
+                    'call_closer' =>$request['call_closer'],
+                    'suspend_at' =>$request['suspend_at'],
+                    'remark' =>$request['remark'],
+                    'closure_time' =>$request['closure_time'],
+                    'repair_amount' =>$request['repair_amount'],
+                    'reopen_at' =>$request['reopen_at'],
+                    
+                ]);
+                    // CallLog::create([
+                    //     'terminal_id' => $request['terminalid'][$i],
+                    //     'atm_name' => $request['atmname'][$i],
+                    //     'custodian_phone' => $request['custodian_phone'][$i],
+                    //     'error_code' => $request['errorcode'][$i],
+                    //     'vendor_name' =>$vendor_name,
+                    //     'vendor_id' =>$vendor_id,
+                    //     'sla_hour' =>$sla_hour,
+                    //     'atm_state' =>$state,
+                    //     'region' =>$region,
+                    //     'ticket_no' =>$atm_code,
+                    //     'request_status' =>"Open",
+                    //     'vendor_request_status' =>"Open",
+                    //     'address' =>$address,
+                    //     'fromaddress' =>$user,
 
 
-                    ]);
+                    // ]);
                     $mails = Requester::pluck('email')->toArray();
                     Mail::to($mails)
                         ->cc(['oladejisteven@gmail.com','oladejisteven@gmail.com'])
@@ -317,42 +319,42 @@ class PosLogController extends Controller
     }
 
 
-    public function checkIn($id)
-    {
-        //
-        $atmreports = PosLog::find($id);
-        $insurances = Insurance::all();
-//        $statuses = Status::all();
-        $departments = Department::all();
-        //    $divisions = Division::all();
-//  return view('atmreports/create');
+//     public function checkIn($id)
+//     {
+//         //
+//         $atmreports = PosLog::find($id);
+//         $insurances = Insurance::all();
+// //        $statuses = Status::all();
+//         $departments = Department::all();
+//         //    $divisions = Division::all();
+// //  return view('atmreports/create');
 
-        if ($atmreports == null || count($atmreports) == 0) {
-            return redirect()->intended('/atmreport-management');
-        }
+//         if ($atmreports == null || count($atmreports) == 0) {
+//             return redirect()->intended('/atmreport-management');
+//         }
 
-        return view('atmreports/checkin', ['atmreports' => $atmreports,
-            'insurances' => $insurances, 'departments' => $departments]);
-    }
+//         return view('atmreports/checkin', ['atmreports' => $atmreports,
+//             'insurances' => $insurances, 'departments' => $departments]);
+//     }
 
     // I need to change the atmname and custodian_phone
 
     public function searchResponse(Request $request){
         $query = $request->get('term','');
-        $bankdatas=\DB::table('pos_datas');
+        $posdatas=\DB::table('pos_datas');
         if($request->type=='terminalid'){
-            $bankdatas->where('pos_id','LIKE','%'.$query.'%')->limit(10);
+            $posdatas->where('pos_id','LIKE','%'.$query.'%')->limit(10);
         }
-        if($request->type=='atmname'){
-            $bankdatas->where('atm_name','LIKE','%'.$query.'%');
+        if($request->type=='pos_id'){
+            $posdatas->where('pos_id','LIKE','%'.$query.'%');
         }
         if($request->type=='custodian_phone'){
-            $bankdatas->where('custodian_phone','LIKE','%'.$query.'%');
+            $posdatas->where('custodian_phone','LIKE','%'.$query.'%');
         }
-        $bankdatas=$bankdatas->get();
+        $posdatas=$posdatas->get();
         $data=array();
-        foreach ($bankdatas as $bankdata) {
-            $data[]=array('terminal_id'=>$bankdata->terminal_id,'atm_name'=>$bankdata->atm_name,'custodian_phone'=>$bankdata->custodian_phone);
+        foreach ($posdatas as $posdata) {
+            $data[]=array('terminal_id'=>$posdata->terminal_id,'pos_id'=>$posdata->pos_id,'custodian_phone'=>$posdata->custodian_phone);
         }
         if(count($data))
             return $data;

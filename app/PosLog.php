@@ -10,8 +10,8 @@ class PosLog extends Model
     protected $fillable = [
 
         'incidence_no','pos_id', 'serial_no', 'branch', 'fault_description', 'subject', 'vendor_id', 'log_date',
-        'fromaddress', 'status', 'sla_hour', 'call_closer', 'suspend_at', 'remark', 'closure_time', 'repair_amount', 'reopen_at'
-
+        'fromaddress', 'status', 'sla_hour', 'call_closer', 'suspend_at', 'remark', 'closure_time', 'repair_amount', 'reopen_at',
+        'request_status'
     ];
 
     public static function insertData($data){
