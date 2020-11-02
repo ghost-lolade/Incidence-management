@@ -1,0 +1,16 @@
+[17-Nov-2017 12:35:21 UTC] PHP Fatal error:  Class 'ZipArchive' not found in /home/uhllekki/public_html/erp/vendor/phpoffice/phpexcel/Classes/PHPExcel/Writer/Excel2007.php on line 227
+[17-Nov-2017 12:35:32 UTC] PHP Fatal error:  Class 'ZipArchive' not found in /home/uhllekki/public_html/erp/vendor/phpoffice/phpexcel/Classes/PHPExcel/Writer/Excel2007.php on line 227
+[17-Nov-2017 12:35:47 UTC] PHP Fatal error:  Class 'ZipArchive' not found in /home/uhllekki/public_html/erp/vendor/phpoffice/phpexcel/Classes/PHPExcel/Writer/Excel2007.php on line 227
+[17-Nov-2017 12:36:28 UTC] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/uhllekki/public_html/erp/vendor/dompdf/dompdf/src/Frame/FrameList.php on line 33
+[17-Nov-2017 12:40:01 UTC] PHP Fatal error:  Class 'ZipArchive' not found in /home/uhllekki/public_html/erp/vendor/phpoffice/phpexcel/Classes/PHPExcel/Writer/Excel2007.php on line 227
+[17-Nov-2017 12:41:28 UTC] PHP Fatal error:  Class 'ZipArchive' not found in /home/uhllekki/public_html/erp/vendor/phpoffice/phpexcel/Classes/PHPExcel/Writer/Excel2007.php on line 227
+[17-Nov-2017 12:45:10 UTC] PHP Fatal error:  Class 'ZipArchive' not found in /home/uhllekki/public_html/erp/vendor/phpoffice/phpexcel/Classes/PHPExcel/Writer/Excel2007.php on line 227
+[17-Nov-2017 12:45:18 UTC] PHP Fatal error:  Class 'ZipArchive' not found in /home/uhllekki/public_html/erp/vendor/phpoffice/phpexcel/Classes/PHPExcel/Writer/Excel2007.php on line 227
+[17-Nov-2017 12:48:31 UTC] PHP Fatal error:  Class 'ZipArchive' not found in /home/uhllekki/public_html/erp/vendor/phpoffice/phpexcel/Classes/PHPExcel/Writer/Excel2007.php on line 227
+[04-Dec-2017 09:15:49 UTC] PHP Fatal error:  Maximum execution time of 30 seconds exceeded in /home/uhllekki/public_html/erp/vendor/dompdf/dompdf/src/Frame.php on line 327
+[04-Dec-2017 09:22:46 UTC] PHP Fatal error:  Class 'ZipArchive' not found in /home/uhllekki/public_html/erp/vendor/phpoffice/phpexcel/Classes/PHPExcel/Writer/Excel2007.php on line 227
+[04-Dec-2017 09:23:00 UTC] PHP Fatal error:  Class 'ZipArchive' not found in /home/uhllekki/public_html/erp/vendor/phpoffice/phpexcel/Classes/PHPExcel/Writer/Excel2007.php on line 227
+[04-Dec-2017 12:37:30 UTC] PHP Parse error:  syntax error, unexpected '$stock' (T_VARIABLE) in /home/uhllekki/public_html/erp/app/Http/Controllers/SalesController.php on line 56
+[04-Dec-2017 12:38:30 UTC] PHP Parse error:  syntax error, unexpected '$notsales' (T_VARIABLE) in /home/uhllekki/public_html/erp/app/Http/Controllers/SalesController.php on line 57
+[04-Dec-2017 12:39:56 UTC] PHP Parse error:  syntax error, unexpected '$notsales' (T_VARIABLE) in /home/uhllekki/public_html/erp/app/Http/Controllers/SalesController.php on line 57
+[04-Dec-2017 12:40:49 UTC] PHP Parse error:  syntax error, unexpected '$notsales' (T_VARIABLE) in /home/uhllekki/public_html/erp/app/Http/Controllers/SalesController.php on line 57
