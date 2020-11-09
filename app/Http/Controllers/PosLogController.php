@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\PosLog;
 use Illuminate\Http\Request;
 
-use App\PosData;
 use App\BankData;
+use App\PosData;
 use App\Technician;
 use App\Brand;
 use App\City;
@@ -116,14 +116,14 @@ class PosLogController extends Controller
                      
                  }
                 
-                $searchvendor= PosData::where('pos_id', '=', $pos_id )->get();
+                $searchvendor= BankData::where('terminal_id', '=', $pos_id )->get();
                 
                 
-                 $searchce= Technician::where('pos_id', '=', $pos_id )->get();
+                 //$searchce= Technician::where('pos_id', '=', $pos_id )->get();
 
-                $cename= $searchce[0]->name;
-                $cephone= $searchce[0]->phone;
-                $ce= $cename.' '. $cephone;
+                //$cename= $searchce[0]->name;
+                //$cephone= $searchce[0]->phone;
+                //$ce= $cename.' '. $cephone;
                 
                 $vendor_name=  $searchvendor[0]->vendor_name;
                 $vendor_id=  $searchvendor[0]->vendor_id;
@@ -138,28 +138,28 @@ class PosLogController extends Controller
         // 'fromaddress', 'status', 'sla_hour', 'call_closer', 'suspend_at', 'remark', 'closure_time', 'repair_amount', 'reopen_at'
                 PosLog::create([
                     'pos_id' => $request['terminalid'][$i],
-                    'incidence_no' =>  $request['incidence_no'][$i],
-                    'serial_no' => $request['serial_no'][$i],
-                    'branch' => $request['branch'],
-                    'fault_description' => $request['fault_description'],
+                    'incidence_no' => $atm_code,
+                    'serial_no' => $request['atmname'][$i],
+                    'branch' => $address,
+                    'fault_description' => $request['errorcode'],
                     'subject' => $request['subject'],
                     'vendor_id' => $vendor_id,
-                    'log date' => $request['log_date'],
+                    'log date' => $current,
                     'fromaddress' =>$user,
-                    'status' =>$request['status'],
+                    'status' =>$state,
                     'sla_hour' =>$sla_hour,
                     'call_closer' =>$request['call_closer'],
                     'suspend_at' =>$request['suspend_at'],
                     'remark' =>$request['remark'],
                     'closure_time' =>$request['closure_time'],
-                    'repair_amount' =>$request['repair_amount'],
+                    //'repair_amount' =>$request['repair_amount'],
                     'reopen_at' =>$request['reopen_at'],
                     
                 ]);
                 
                  $pos_id= $request['terminalid'][0];
                 
-                 $branchmail = PosData::Where('pos_id', '=', $pos_id)->get();
+                 $branchmail = BankData::where('terminal_id', '=', $pos_id)->get();
             
             
             // If Email of Branch exist use this 
@@ -172,7 +172,7 @@ class PosLogController extends Controller
                     ->send(new LogCallMail());
                
 
-        $techmail = Technician::Where('pos_id', '=', $pos_id)->get();
+        $techmail = Technician::Where('terminal_id', '=', $pos_id)->get();
 
                  $techname= $techmail[0]->email;
                  
@@ -212,7 +212,7 @@ class PosLogController extends Controller
         }
 
 
-        return redirect()->intended('listopencall')->with('success','Incidence  created successfully!');
+        return redirect()->intended('poslistopencall')->with('success','Incidence  created successfully!');
         
          // return redirect('vendor-management')->with('success','Item created successfully!');
         
@@ -238,7 +238,7 @@ class PosLogController extends Controller
                 for ($i = 0; $i < $counter; ++$i) {
                     $terminal_id= $request['terminalid'][$i];
 
-                       $searchvendor= PosData::where('terminal_id', '=', $terminal_id )->get();
+                       $searchvendor= BankData::where('terminal_id', '=', $terminal_id )->get();
 
                    $vendor_name=  $searchvendor[0]->vendor_name;
                    $vendor_id=  $searchvendor[0]->vendor_id;
@@ -252,12 +252,12 @@ class PosLogController extends Controller
                    PosLog::create([
                     'pos_id' => $request['terminalid'][$i],
                     'incidence_no' =>  $request['incidence_no'][$i],
-                    'serial_no' => $request['serial_no'][$i],
+                    'serial_no' => $request['atmname'][$i],
                     'branch' => $request['branch'],
-                    'fault_description' => $request['fault_description'],
+                    'fault_description' => $request['errorcode'][$i],
                     'subject' => $request['subject'],
                     'vendor_id' => $vendor_id,
-                    'log date' => $request['log_date'],
+                    'log_date' => $current,
                     'fromaddress' =>$user,
                     'status' =>$request['status'],
                     'sla_hour' =>$sla_hour,
@@ -341,20 +341,20 @@ class PosLogController extends Controller
 
     public function searchResponse(Request $request){
         $query = $request->get('term','');
-        $posdatas=\DB::table('pos_datas');
+        $BankDatas=\DB::table('pos_datas');
         if($request->type=='terminalid'){
-            $posdatas->where('pos_id','LIKE','%'.$query.'%')->limit(10);
+            $BankDatas->where('pos_id','LIKE','%'.$query.'%')->limit(10);
         }
         if($request->type=='pos_id'){
-            $posdatas->where('pos_id','LIKE','%'.$query.'%');
+            $BankDatas->where('pos_id','LIKE','%'.$query.'%');
         }
         if($request->type=='custodian_phone'){
-            $posdatas->where('custodian_phone','LIKE','%'.$query.'%');
+            $BankDatas->where('custodian_phone','LIKE','%'.$query.'%');
         }
-        $posdatas=$posdatas->get();
+        $BankDatas=$BankDatas->get();
         $data=array();
-        foreach ($posdatas as $posdata) {
-            $data[]=array('terminal_id'=>$posdata->terminal_id,'pos_id'=>$posdata->pos_id,'custodian_phone'=>$posdata->custodian_phone);
+        foreach ($BankDatas as $BankData) {
+            $data[]=array('terminal_id'=>$BankData->terminal_id,'pos_id'=>$BankData->pos_id,'custodian_phone'=>$BankData->custodian_phone);
         }
         if(count($data))
             return $data;
@@ -422,25 +422,26 @@ class PosLogController extends Controller
                         //   BankData::where('terminal_id', $importData[1])->delete();
                         // DOES ARRANGEMENT COUNT???
                         PosLog::updateOrCreate(
-                            ['ticket_no' => $importData[0]],
+                            ['pos_id' => $importData[0]],
                             [
-                                "ticket_no"=>$importData[0],
-                                "terminal_id"=>$importData[1],
-                                "sol_id"=>$importData[2],
-                                "atm_name"=>$importData[3],
-                                "serial_no"=>$importData[4],
-                                "address"=>$importData[5],
-                                "state"=>$importData[6],
-                                "subject"=>$importData[7],
-                                "error_code"=>$importData[8],
-                                "custodian_phone"=>$importData[9],
-                                "request_status"=>$importData[10],
-                                "part_replaced"=>$importData[11],
-                                "created_at"=>$importData[12],
-                                "mail_at"=>$importData[12],
-                                "closed_at"=>$importData[13],
-                                "sla_hour"=>$importData[14],
-                                "vendor_name"=>$importData[15]
+                                'pos_id' => $importData[0],
+                                'incidence_no' =>  $importData[1],
+                                'serial_no' => $importData[2],
+                                'branch' => $importData[3],
+                                'fault_description' => $importData[4],
+                                'subject' => $importData[5],
+                                'vendor_id' => $importData[6],
+                                'log date' => $importData[7],
+                                'fromaddress' =>$importData[8],
+                                'status' => $importData[9],
+                                'sla_hour' => $importData[10],
+                                'call_closer' => $importData[11],
+                                'suspend_at' => $importData[12],
+                                'remark' => $importData[13],
+                                'closure_time' => $importData[14],
+                                'repair_amount' => $importData[15],
+                                'reopen_at' =>$importData[16],
+
 
                             ]
                         );
@@ -487,7 +488,7 @@ class PosLogController extends Controller
     public function viewReporter(Request $request)
     {
 
-        $vendor_id=$request['vendor_id'];
+        $vendor_id=$request['custodian_phone'];
       //  $region=$request['region'];
         $state_id=$request['branch'];
         $status=$request['status'];
@@ -597,23 +598,23 @@ class PosLogController extends Controller
         $from_date=$request['from_date'];
 
 //        if ($user==0){
-            $atmreports= PosLog::Where('terminal_id', '=', $terminal_id)
-                ->Where('mail_at','>=', $from_date)
-                ->Where('mail_at','<=', $to_date)
+            $atmreports= PosLog::Where('pos_id', '=', $terminal_id)
+                ->Where('log_date','>=', $from_date)
+                ->Where('log_date','<=', $to_date)
                 ->get();
-            $atmparts= PartReplace::Where('terminal_id', '=', $terminal_id)
-                ->Where('created_at','>=', $from_date)
-                ->Where('created_at','<=', $to_date)
-                ->get();
+            // $atmparts= PartReplace::Where('pos_id', '=', $terminal_id)
+            //     ->Where('created_at','>=', $from_date)
+            //     ->Where('created_at','<=', $to_date)
+            //     ->get();
 
-            $atmpartcost= PartReplace::Where('terminal_id', '=', $terminal_id)
-                ->Where('created_at','>=', $from_date)
-                ->Where('created_at','<=', $to_date)
-                ->sum('price');
+            // $atmpartcost= PartReplace::Where('pos-id', '=', $terminal_id)
+            //     ->Where('created_at','>=', $from_date)
+            //     ->Where('created_at','<=', $to_date)
+            //     ->sum('price');
 
-            $callcount= PosLog::Where('terminal_id', '=', $terminal_id)
-                ->Where('mail_at','>=', $from_date)
-                ->Where('mail_at','<=', $to_date)
+            $callcount= PosLog::Where('pos_id', '=', $terminal_id)
+                ->Where('log_date','>=', $from_date)
+                ->Where('log_date','<=', $to_date)
                 ->count();
 
         return view('posreport.viewterminalvaries', compact('atmreports', 'callcount', 'atmparts','atmpartcost'));

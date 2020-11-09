@@ -15,7 +15,7 @@
                         
                             <h3>New Incidence</h3>
                             <div>
-                                <?php echo Form::open(['method'=>'POST', 'action'=> 'CallLogController@storeEco','files'=>true]); ?>
+                                <?php echo Form::open(['method'=>'POST', 'action'=> 'PosLogController@storeEco','files'=>true]); ?>
 
 
                                 <table class="table" id="tableauto">
@@ -34,13 +34,13 @@
                                         
                                         
                                         <td><b>Terminal ID:</b> <input class="form-control autocomplete_txt" type='text' data-type="terminalid" id='terminalid_1' name='terminalid[]' required/></td>
-                                        <td><b>ATM Name:</b>
+                                        <td><b>Serial No:</b>
                                         <input class="form-control autocomplete_txt" type='text' data-type="atmname" id='atmname_1' name='atmname[]' required/> </td>
                                         
                                         
                                     </tr>
                                     <tr>
-                                        <td><b>Custodian Details:</b><input class="form-control autocomplete_txt" type='text' placeholder="Custodian Details" data-type="custodian_phone" id='custodian_phone_1' name='custodian_phone[]' required/> </td>
+                                        <td><b>Vendor ID:</b><input class="form-control autocomplete_txt" type='text' placeholder="Custodian Details" data-type="custodian_phone" id='custodian_phone_1' name='custodian_phone[]' required/> </td>
 
                                         <td><b>Error Description:</b>
 

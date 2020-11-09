@@ -66,7 +66,7 @@
                             <!-- /.box-header -->
                             <div class="box-body">
 
-                                {!! Form::open(['method'=>'POST', 'action'=> 'CallLogController@uploadCallLogFile','files'=>true]) !!}
+                                {!! Form::open(['method'=>'POST', 'action'=> 'PosLogController@uploadCallLogFile','files'=>true]) !!}
 
                                 {{ csrf_field() }}
                                 <input type='file' name='file' required >

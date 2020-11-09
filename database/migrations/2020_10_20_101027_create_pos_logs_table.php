@@ -27,9 +27,9 @@ class CreatePosLogsTable extends Migration
             $table->string('status');
             $table->integer('sla_hour');
             $table->string('call_closer')->nullable();
-            $table->dateTime('suspend_at');
+            $table->dateTime('suspend_at')->nullable();
             $table->longText('remark')->nullable();
-            $table->dateTime('closure_time');
+            $table->dateTime('closure_time')->nullable();
             $table->decimal('repair_amount')->default('0.0');
             $table->dateTime('reopen_at');
             $table->timestamps();

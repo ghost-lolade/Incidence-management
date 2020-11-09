@@ -25,7 +25,7 @@
                         <h3 class="box-title">List of Call logged</h3>
                     </div>
                     <div class="col-sm-4">
-                        <a class="btn btn-primary" href="{{ route('atmreport-management.create') }}">Add New atmreport</a>
+                        <a class="btn btn-primary" href="{{ route('posreport-management.create') }}">Add New PoS Report</a>
                     </div>
                 </div>
             </div>
@@ -43,7 +43,7 @@
 
                         <div class="box">
                             <div class="box-header">
-                                <h2 class="box-title">ATM Report --  {{$date = date('Y-m-d H:i:s')}}</h2>
+                                <h2 class="box-title">POS Report --  {{$date = date('Y-m-d H:i:s')}}</h2>
                             </div>
                             <!-- /.box-header -->
                             <div class="box-body">

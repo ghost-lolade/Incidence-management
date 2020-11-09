@@ -16,7 +16,7 @@
                         {{--<div id="accordion">--}}
                             <h3>New Incidence</h3>
                             <div>
-                                {!! Form::open(['method'=>'POST', 'action'=> 'CallLogController@store','files'=>true]) !!}
+                                {!! Form::open(['method'=>'POST', 'action'=> 'PosLogController@store','files'=>true]) !!}
 
                                 <table class="table" id="tableauto">
                                     <tr>

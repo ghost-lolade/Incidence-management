@@ -1,31 +1,32 @@
-@extends('atmreport.base')
-@section('action-content')
+<?php $__env->startSection('action-content'); ?>
     <!-- Main content -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <section class="content">
         <div class="box">
             <div class="box-header">
 
-                @if (session()->has('success_message'))
+                <?php if(session()->has('success_message')): ?>
                     <div class="alert alert-success">
-                        {{ session()->get('success_message') }}
-                    </div>
-                @endif
+                        <?php echo e(session()->get('success_message')); ?>
 
-                @if (session()->has('error_message'))
-                    <div class="alert alert-danger">
-                        {{ session()->get('error_message') }}
                     </div>
-                @endif
+                <?php endif; ?>
+
+                <?php if(session()->has('error_message')): ?>
+                    <div class="alert alert-danger">
+                        <?php echo e(session()->get('error_message')); ?>
+
+                    </div>
+                <?php endif; ?>
 
 
 
                 <div class="row">
                     <div class="col-sm-8">
-                        <h3 class="box-title">List of Open Call {{$date = date('Y-m-d H:i:s')}}</h3>
+                        <h3 class="box-title">List of Open Call <?php echo e($date = date('Y-m-d H:i:s')); ?></h3>
                     </div>
                     <div class="col-sm-4">
-                        <a class="btn btn-primary" href="{{ url('logeco') }}">Log Incidence</a>
+                        <a class="btn btn-primary" href="<?php echo e(url('logeco')); ?>">Log Incidence</a>
                     </div>
                 </div>
             </div>
@@ -42,9 +43,9 @@
 
 
                         <div class="box">
-                            {{--<div class="box-header">--}}
-                                {{--<h3 class="box-title">Registered atmreport</h3>--}}
-                            {{--</div>--}}
+                            
+                                
+                            
                             <!-- /.box-header -->
                             <div class="box-body">
 
@@ -64,62 +65,62 @@
 
                                     <th>Logged Time</th>
                                     <th>Action</th>
-                                    {{--<th>NoK Name/Mobile</th>--}}
-                                    {{--<th width="20%">Action</th>--}}
+                                    
+                                    
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach ($atmreports as $atmreport)
+                                <?php $__currentLoopData = $atmreports; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $atmreport): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr role="row" class="odd">
-{{--                                        <td><img src="../{{$atmreport->picture }}" width="50px" height="50px"/></td>--}}
-                                        <td>{{ $atmreport->id }}</td>
-                                        <td>{{ $atmreport->pos_id }}</td>
-                                        <td>{{ $atmreport->serial_no }}</td>
-                                        <td>{{ $atmreport->branch }}</td>
-                                        <td>{{ $atmreport->subject}}</td>
-                                        <td width="25%">{{ $atmreport->fault_description}}</td>
-                                        <td>{{ $atmreport->vendor_id }} </td>  <td>{{ $atmreport->ce_name }}  </td>
-{{--                                        <td>{{$atmreport->insurance ? $atmreport->insurance->name : 'No atmreport type'}}</td>--}}
-                                        <td>{{ $atmreport->request_status }}</td>
-                                        <!--<td>{{ $atmreport->remark }}</td>-->
-                                        <td>{{ $atmreport->log_date }}</td>
 
-                                        <td>   <button class="show-modal btn btn-success" data-id="{{$atmreport->id}}" data-title="{{$atmreport->terminal_id}}" data-content="{{$atmreport->address}} -- {{$atmreport->custodian_phone}}-- {{$atmreport->decline_reason}}"
-                                                       data-assign="{{$atmreport->ce_name}}" data-status="{{$atmreport->ce_status}}" data-timer="{{$atmreport->ce_arrival_time}}">
+                                        <td><?php echo e($atmreport->id); ?></td>
+                                        <td><?php echo e($atmreport->pos_id); ?></td>
+                                        <td><?php echo e($atmreport->serial_no); ?></td>
+                                        <td><?php echo e($atmreport->branch); ?></td>
+                                        <td><?php echo e($atmreport->subject); ?></td>
+                                        <td width="25%"><?php echo e($atmreport->fault_description); ?></td>
+                                        <td><?php echo e($atmreport->vendor_id); ?> </td>  <td><?php echo e($atmreport->ce_name); ?>  </td>
+
+                                        <td><?php echo e($atmreport->request_status); ?></td>
+                                        <!--<td><?php echo e($atmreport->remark); ?></td>-->
+                                        <td><?php echo e($atmreport->log_date); ?></td>
+
+                                        <td>   <button class="show-modal btn btn-success" data-id="<?php echo e($atmreport->id); ?>" data-title="<?php echo e($atmreport->terminal_id); ?>" data-content="<?php echo e($atmreport->address); ?> -- <?php echo e($atmreport->custodian_phone); ?>-- <?php echo e($atmreport->decline_reason); ?>"
+                                                       data-assign="<?php echo e($atmreport->ce_name); ?>" data-status="<?php echo e($atmreport->ce_status); ?>" data-timer="<?php echo e($atmreport->ce_arrival_time); ?>">
                                                 <span class="glyphicon glyphicon-eye-open"></span> Show</button>
-{{--                                            <button class="delete-modal btn btn-primary" data-id="{{$atmreport->id}}" data-title="{{$atmreport->terminal_id}}" data-content="{{$atmreport->content}}">--}}
-{{--                                                <span class="glyphicon glyphicon-edit"></span> Reopen Call</button>--}}
+
+
                                         </td>
                                     </tr>
-                                @endforeach
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
-                                @foreach ($atmnotclose as $atmnotclose)
+                                <?php $__currentLoopData = $atmnotclose; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $atmnotclose): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr role="row" class="odd">
-                                        {{--                                        <td><img src="../{{$atmreport->picture }}" width="50px" height="50px"/></td>--}}
-                                        <td>{{ $atmnotclose->id }}</td>
-                                        <td>{{ $atmnotclose->terminal_id }}</td>
-                                        <td>{{ $atmnotclose->atm_name }}</td>
-                                        <td>{{ $atmnotclose->address }}</td>
-                                        <td>{{ $atmnotclose->subject }}</td>
+                                        
+                                        <td><?php echo e($atmnotclose->id); ?></td>
+                                        <td><?php echo e($atmnotclose->terminal_id); ?></td>
+                                        <td><?php echo e($atmnotclose->atm_name); ?></td>
+                                        <td><?php echo e($atmnotclose->address); ?></td>
+                                        <td><?php echo e($atmnotclose->subject); ?></td>
                                     
-                                        <td width="25%">{{ $atmnotclose->error_code}}</td>
-                                        <td>{{ $atmnotclose->vendor_name }}</td>
-                                        <td> {{ $atmnotclose->ce_name }} </td>
-                                        {{--                                        <td>{{$atmreport->insurance ? $atmreport->insurance->name : 'No atmreport type'}}</td>--}}
-                                        <td>{{ $atmnotclose->request_status }}</td>
-                                        <!--<td>{{ $atmnotclose->remark }}</td>-->
+                                        <td width="25%"><?php echo e($atmnotclose->error_code); ?></td>
+                                        <td><?php echo e($atmnotclose->vendor_name); ?></td>
+                                        <td> <?php echo e($atmnotclose->ce_name); ?> </td>
+                                        
+                                        <td><?php echo e($atmnotclose->request_status); ?></td>
+                                        <!--<td><?php echo e($atmnotclose->remark); ?></td>-->
 
-                                        <td>{{ $atmnotclose->mail_at }}</td>
+                                        <td><?php echo e($atmnotclose->mail_at); ?></td>
 
 
-                                        <td>   <button class="show-modal btn btn-success" data-id="{{$atmnotclose->id}}" data-title="{{$atmnotclose->terminal_id}}" data-content="{{$atmnotclose->address}} -- {{$atmnotclose->custodian_phone}}-- {{$atmnotclose->decline_reason}}"
-                                                       data-assign="{{$atmnotclose->ce_name}}" data-status="{{$atmnotclose->ce_status}}" data-timer="{{$atmnotclose->ce_arrival_time}}">
+                                        <td>   <button class="show-modal btn btn-success" data-id="<?php echo e($atmnotclose->id); ?>" data-title="<?php echo e($atmnotclose->terminal_id); ?>" data-content="<?php echo e($atmnotclose->address); ?> -- <?php echo e($atmnotclose->custodian_phone); ?>-- <?php echo e($atmnotclose->decline_reason); ?>"
+                                                       data-assign="<?php echo e($atmnotclose->ce_name); ?>" data-status="<?php echo e($atmnotclose->ce_status); ?>" data-timer="<?php echo e($atmnotclose->ce_arrival_time); ?>">
                                                 <span class="glyphicon glyphicon-eye-open"></span> Show</button>
-{{--                                            <button class="delete-modal btn btn-primary" data-id="{{$atmnotclose->id}}" data-title="{{$atmnotclose->terminal_id}}" data-content="{{$atmnotclose->content}}">--}}
-{{--                                                <span class="glyphicon glyphicon-edit"></span> Reopen Call</button>--}}
+
+
                                         </td>
                                     </tr>
-                                @endforeach
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </tbody>
                                 <tfoot>
                                 <tr>
@@ -135,8 +136,8 @@
 
                                     <th>Logged Time</th>
                                     <th>Action</th>
-                                    {{--<th>NoK Name/Mobile</th>--}}
-                                    {{--<th width="20%">Action</th>--}}
+                                    
+                                    
                                 </tr>
                                 </tfoot>
                             </table>
@@ -229,19 +230,19 @@
                                                             <p class="errorContent text-center alert alert-danger hidden"></p>
                                                         </div>
                                                     </div>
-                                                    {{--<div class="form-group">--}}
-                                                        {{--<label class="control-label col-sm-2" for="content">Date:</label>--}}
-                                                        {{--<div class="col-sm-10">--}}
-                                                            {{--<input type="text"  class="form-control pull-right" id="to" placeholder="Select Date" >--}}
-                                                            {{--<p class="errorContent text-center alert alert-danger hidden"></p>--}}
-                                                        {{--</div>--}}
-                                                    {{--</div>--}}
-                                                    {{--<div class="form-group">--}}
-                                                        {{--<label class="control-label col-sm-2" for="content">Time:</label>--}}
-                                                        {{--<div class="col-sm-10">--}}
-                                                            {{--<input type="text"  class="form-control pull-right" id="timeDate2" placeholder="Select Time">--}}
-                                                            {{--<p class="errorContent text-center alert alert-danger hidden"></p>--}}
-                                                        {{--</div>--}}
+                                                    
+                                                        
+                                                        
+                                                            
+                                                            
+                                                        
+                                                    
+                                                    
+                                                        
+                                                        
+                                                            
+                                                            
+                                                        
 
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-primary delete" data-dismiss="modal">
@@ -278,18 +279,18 @@
 
 
         <!-- jQuery -->
-        {{-- <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script> --}}
+        
         <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
 
         <!-- Bootstrap JavaScript -->
         <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.1/js/bootstrap.min.js"></script>
 
         <!-- toastr notifications -->
-        {{-- <script type="text/javascript" src="{{ asset('toastr/toastr.min.js') }}"></script> --}}
+        
         <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
         <!-- icheck checkboxes -->
-        <script type="text/javascript" src="{{ asset('icheck/icheck.min.js') }}"></script>
+        <script type="text/javascript" src="<?php echo e(asset('icheck/icheck.min.js')); ?>"></script>
 
         <!-- Delay table load until everything else is loaded -->
         <script>
@@ -367,16 +368,16 @@
                         'copy', 'print',
                         {
                             extend: 'csv',
-                            title: 'Call Log_ {{$date}}',
+                            title: 'Call Log_ <?php echo e($date); ?>',
 
                         },
                         {
                             extend: 'excel',
-                            title: 'Call Log_ {{$date}}'
+                            title: 'Call Log_ <?php echo e($date); ?>'
                         },
                         {
                         extend: 'pdf',
-                        title: 'Call Log_ {{$date}}'
+                        title: 'Call Log_ <?php echo e($date); ?>'
                         },
                     ]
                 } );
@@ -398,4 +399,5 @@
 
     <!-- /.content -->
     </div>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('atmreport.base', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

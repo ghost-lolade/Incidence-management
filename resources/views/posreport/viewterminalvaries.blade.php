@@ -81,12 +81,12 @@
                                         <th>Log Date</th>
                                         <th>Terminal ID</th>
 
-                                        <th>ATM Name</th>
+                                        <th>POS Number</th>
                                         <th>ATM Address</th>
                                         <th>ATM State </th>
                                         <th>Error Code</th>
-                                        <th>Custodian Detail</th>
-                                        <th>Vendor</th>
+                                        {{-- <th>Custodian Detail</th> --}}
+                                        <th>Vendor ID</th>
                                         <th>Suspend At</th>
                                         <th>Reopen At</th>
                                         <th>Call Status </th>
@@ -104,16 +104,16 @@
                                     @foreach ($atmreports as $atmreport)
                                         <tr role="row" class="odd">
                                             {{--                                        <td><img src="../{{$atmreport->picture }}" width="50px" height="50px"/></td>--}}
-                                            <td>{{ $atmreport->id }}</td>
+                                            <td>{{ $atmreport->incidence_no }}</td>
                                             <td>{{ $atmreport->created_at }}</td>
-                                            <td>{{ $atmreport->terminal_id }}</td>
+                                            <td>{{ $atmreport->pos_id }}</td>
 
-                                            <td>{{ $atmreport->atm_name }}</td>
-                                            <td>{{ $atmreport->address }}</td>
-                                            <td>{{ $atmreport->atm_state }}</td>
-                                            <td>{{ $atmreport->error_code}}</td>
-                                            <td>{{ $atmreport->custodian_phone}}</td>
-                                            <td>{{ $atmreport->vendor_name }}</td>
+                                            <td>{{ $atmreport->serial_no }}</td>
+                                            <td>{{ $atmreport->branch }}</td>
+                                            <td>{{ $atmreport->status }}</td>
+                                            <td>{{ $atmreport->fault_description}}</td>
+                                            {{-- <td>{{ $atmreport->custodian_phone}}</td> --}}
+                                            <td>{{ $atmreport->vendor_id }}</td>
 
 
 
@@ -121,8 +121,8 @@
                                             <td>{{ $atmreport->reopen_at }}</td>
                                             <td>{{ $atmreport->request_status }} - {{ $atmreport->remark }}</td>
                                             <td>{{ $atmreport->part_replaced }} - {{ $atmreport->closure_comment }}</td>
-                                            <td>{{ $atmreport->closed_at }}</td>
-                                            <td>{{ $atmreport->brand }}</td>
+                                            <td>{{ $atmreport->closure_time }}</td>
+                                            {{-- <td>{{ $atmreport->brand }}</td> --}}
                                             <td>{{ $atmreport->fromaddress }}</td>
                                             {{--                                            <td>{{  $diff_in_days = $to_date->diffInDays($atmreport->log_day) }}</td>--}}
                                             {{--

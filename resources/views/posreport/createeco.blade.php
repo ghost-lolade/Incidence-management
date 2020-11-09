@@ -16,7 +16,7 @@
                         {{--<div id="accordion">--}}
                             <h3>New Incidence</h3>
                             <div>
-                                {!! Form::open(['method'=>'POST', 'action'=> 'CallLogController@storeEco','files'=>true]) !!}
+                                {!! Form::open(['method'=>'POST', 'action'=> 'PosLogController@storeEco','files'=>true]) !!}
 
                                 <table class="table" id="tableauto">
                                     <b>Subject/ Error Message</b>
@@ -34,13 +34,13 @@
                                         {{--<td><input type='checkbox' class='chkbox'/></td>--}}
                                         {{--<td><span id='sn'>1.</span></td>--}}
                                         <td><b>Terminal ID:</b> <input class="form-control autocomplete_txt" type='text' data-type="terminalid" id='terminalid_1' name='terminalid[]' required/></td>
-                                        <td><b>ATM Name:</b>
+                                        <td><b>Serial No:</b>
                                         <input class="form-control autocomplete_txt" type='text' data-type="atmname" id='atmname_1' name='atmname[]' required/> </td>
                                         {{--<td><input class="form-control autocomplete_txt" type='text' data-type="custodian_phone" id='custodian_phone_1' name='custodian_phone[]'/></td>--}}
                                         {{--<td><input class="form-control autocomplete_txt1" type='text'  name='errorcode[]'/> </td>--}}
                                     </tr>
                                     <tr>
-                                        <td><b>Custodian Details:</b><input class="form-control autocomplete_txt" type='text' placeholder="Custodian Details" data-type="custodian_phone" id='custodian_phone_1' name='custodian_phone[]' required/> </td>
+                                        <td><b>Vendor ID:</b><input class="form-control autocomplete_txt" type='text' placeholder="Custodian Details" data-type="custodian_phone" id='custodian_phone_1' name='custodian_phone[]' required/> </td>
 
                                         <td><b>Error Description:</b>
 
